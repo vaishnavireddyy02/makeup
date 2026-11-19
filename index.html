@@ -1,0 +1,355 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glow & Glam - Makeup Kits</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #fff5f8;
+    color: #442b36;
+}
+
+header {
+    background: #d7799c;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    letter-spacing: 2px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.hero {
+    text-align: center;
+    padding: 90px 20px;
+    background: linear-gradient(120deg, #f4c6d5, #fff0f5);
+}
+
+.hero h2 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    margin-bottom: 25px;
+}
+
+.btn {
+    background: #bd547e;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+#kits {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+h2 {
+    color: #b84d76;
+    margin-bottom: 25px;
+}
+
+#search {
+    padding: 12px;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #d88ba7;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.filters {
+    margin: 20px;
+}
+
+.filters button {
+    background: #d7799c;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background: #a83f69;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px #e5b9c9;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+}
+
+.card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.card h3 {
+    margin: 12px;
+    color: #a83f69;
+}
+
+.card p {
+    margin: 10px;
+}
+
+.price {
+    font-weight: bold;
+    color: #bd547e;
+    font-size: 19px;
+}
+
+.card button {
+    background: #bd547e;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#about, #contact {
+    text-align: center;
+    padding: 50px 20px;
+    line-height: 2;
+}
+
+footer {
+    background: #d7799c;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+@media(max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+
+    .hero h2 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>GLOW & GLAM ✨</h1>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#kits">Makeup Kits</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        🛍️ Cart: <span id="cart-count">0</span>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <h2>Discover Your Beauty</h2>
+    <p>Find the perfect makeup kit for every occasion.</p>
+    <a href="#kits" class="btn">Explore Kits</a>
+</section>
+
+<section id="kits">
+    <h2>Our Makeup Collection 💄</h2>
+
+    <input type="text" id="search"
+    placeholder="Search makeup kits...">
+
+    <div class="filters">
+        <button onclick="filterKits('All')">All</button>
+        <button onclick="filterKits('Basic')">Basic</button>
+        <button onclick="filterKits('Bridal')">Bridal</button>
+        <button onclick="filterKits('Professional')">Professional</button>
+        <button onclick="filterKits('Party')">Party</button>
+        <button onclick="filterKits('Travel')">Travel</button>
+        <button onclick="filterKits('Natural')">Natural</button>
+        <button onclick="filterKits('Eye')">Eye</button>
+    </div>
+
+    <div class="products" id="products"></div>
+</section>
+
+<section id="about">
+    <h2>About Us</h2>
+    <p>
+        Glow & Glam brings you beautiful makeup kits
+        for every style, occasion and personality.
+        Discover your favourite beauty essentials!
+    </p>
+</section>
+
+<section id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: glowandglam@example.com</p>
+    <p>Phone: +91 98765 43210</p>
+</section>
+
+<footer>
+    <p>© 2026 Glow & Glam. All Rights Reserved.</p>
+</footer>
+
+<script>
+const kits = [
+    {
+        name: "Basic Makeup Kit",
+        category: "Basic",
+        price: 799,
+        image: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500",
+        description: "Perfect for everyday makeup."
+    },
+    {
+        name: "Bridal Makeup Kit",
+        category: "Bridal",
+        price: 2499,
+        image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500",
+        description: "Look gorgeous on your special day."
+    },
+    {
+        name: "Professional Makeup Kit",
+        category: "Professional",
+        price: 3499,
+        image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500",
+        description: "Complete kit for makeup artists."
+    },
+    {
+        name: "Party Makeup Kit",
+        category: "Party",
+        price: 1599,
+        image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=500",
+        description: "Get ready for every celebration."
+    },
+    {
+        name: "Travel Makeup Kit",
+        category: "Travel",
+        price: 999,
+        image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=500",
+        description: "Compact beauty essentials on the go."
+    },
+    {
+        name: "Natural Makeup Kit",
+        category: "Natural",
+        price: 1299,
+        image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=500",
+        description: "A fresh and natural makeup look."
+    },
+    {
+        name: "Eye Makeup Kit",
+        category: "Eye",
+        price: 699,
+        image: "https://images.unsplash.com/photo-1583241800698-e8ab01830a4d?w=500",
+        description: "Eyeshadow, mascara and eyeliner."
+    }
+];
+
+let cartCount = 0;
+
+function displayKits(items) {
+    const container = document.getElementById("products");
+
+    container.innerHTML = "";
+
+    items.forEach((kit) => {
+        container.innerHTML += `
+            <div class="card">
+                <img src="${kit.image}" alt="${kit.name}">
+                <h3>${kit.name}</h3>
+                <p>${kit.description}</p>
+                <p class="price">₹${kit.price}</p>
+                <button onclick="addToCart()">
+                    Add to Cart
+                </button>
+            </div>
+        `;
+    });
+
+    if (items.length === 0) {
+        container.innerHTML = "<p>No kits found.</p>";
+    }
+}
+
+function filterKits(category) {
+    if (category === "All") {
+        displayKits(kits);
+    } else {
+        const filtered = kits.filter(
+            kit => kit.category === category
+        );
+        displayKits(filtered);
+    }
+}
+
+function addToCart() {
+    cartCount++;
+    document.getElementById("cart-count").innerText = cartCount;
+    alert("Makeup kit added to cart!");
+}
+
+document.getElementById("search")
+.addEventListener("input", function() {
+
+    const searchValue = this.value.toLowerCase();
+
+    const filtered = kits.filter(kit =>
+        kit.name.toLowerCase().includes(searchValue)
+    );
+
+    displayKits(filtered);
+});
+
+displayKits(kits);
+</script>
+
+</body>
+</html>
